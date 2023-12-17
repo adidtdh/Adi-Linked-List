@@ -1,0 +1,1 @@
+Really simple linked list for my Adi Big Integer project. Honestly pretty stupid.

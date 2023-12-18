@@ -1,9 +1,5 @@
+#include "AdiLinkedList.h"
 #include <stdlib.h>
-
-struct Node{
-    struct Node* next;
-    void * data;
-};
 
 struct Node* initNode(void* data){
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node)); // new node is given space in heap
@@ -12,21 +8,55 @@ struct Node* initNode(void* data){
     return newNode;
 }
 
-void join(struct Node* head, struct Node* tail){
-    getLastNode(head)->next = tail; // tail is joined to the last node in the head
+struct AdiLinkedList* initAdiLinkedList(){
+    struct AdiLinkedList* newList = (struct AdiLinkedList*)malloc(sizeof(struct AdiLinkedList));
+    return newList;
 }
 
-void* get(struct Node* head, int index){
+void* get(struct AdiLinkedList* list, int index){
+    struct Node* head = list->head;
+
     for(int i = 0; i < index; i++){
         head = head->next;
     }
     return head->data;
 }
 
-struct Node* getLastNode(struct Node* head){
-    // head is used as cursor
-    while(head->next != NULL){
-        head = head->next;
+void insertAtBegining(struct AdiLinkedList* list, struct Node* newNode){
+    newNode->next = list->head;
+    list->head = newNode;
+}
+
+void insertAtEnd(struct AdiLinkedList* list, struct Node* newNode){
+    if(list->head == NULL){
+        list->head = newNode;
+        list->tail = newNode;
+        return;
     }
-    return head;
+    list->tail->next = newNode;
+    list->tail = newNode;
+}
+
+void freeNodes(struct Node* head){
+    struct Node* next;
+    struct Node* curr = head;
+
+    while(curr !=  NULL){
+        next = curr->next;
+        free(curr->data);
+        free(curr);
+        curr = next;
+    }
+}
+
+void freeAdiLinkedList(struct AdiLinkedList* list){
+    freeNode(list->head);
+    free(list);
+}
+
+void freeHead(struct AdiLinkedList* list){
+    struct Node* oldhead = list->head;
+    list->head = list->head->next;
+    free(oldhead->data);
+    free(oldhead);
 }

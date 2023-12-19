@@ -22,12 +22,14 @@ void* get(struct AdiLinkedList* list, int index){
     return head->data;
 }
 
-void insertAtBegining(struct AdiLinkedList* list, struct Node* newNode){
+void insertAtBegining(struct AdiLinkedList* list, void* data){
+    struct Node* newNode = initNode(data);
     newNode->next = list->head;
     list->head = newNode;
 }
 
-void insertAtEnd(struct AdiLinkedList* list, struct Node* newNode){
+void insertAtEnd(struct AdiLinkedList* list, void* data){
+    struct Node* newNode = initNode(data);
     if(list->head == NULL){
         list->head = newNode;
         list->tail = newNode;
@@ -50,7 +52,7 @@ void freeNodes(struct Node* head){
 }
 
 void freeAdiLinkedList(struct AdiLinkedList* list){
-    freeNode(list->head);
+    freeNodes(list->head);
     free(list);
 }
 

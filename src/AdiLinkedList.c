@@ -22,6 +22,17 @@ void* get(struct AdiLinkedList* list, int index){
     return head->data;
 }
 
+void set(struct AdiLinkedList* list, int index, void* data){
+    struct Node* head = list->head;
+
+    for(int i = 0; i < index; i++){
+        head = head->next;
+    }
+    
+    head->data = data;
+}
+
+
 void insertAtBegining(struct AdiLinkedList* list, void* data){
     struct Node* newNode = initNode(data);
     newNode->next = list->head;

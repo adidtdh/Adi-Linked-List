@@ -20,6 +20,7 @@ struct AdiLinkedList{
 struct Node* initNode(void* data);
 struct AdiLinkedList* initAdiLinkedList();
 void* get(struct AdiLinkedList* list, int index);
+void set(struct AdiLinkedList* list, int index, void* data);
 void insertAtBegining(struct AdiLinkedList* list, void* data);
 void insertAtEnd(struct AdiLinkedList* list, void* data);
 void freeNodes(struct Node* head);
